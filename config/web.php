@@ -6,10 +6,13 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+	'defaultRoute' => 'book/index',
     'components' => [
+    	'assetManager' => [
+    		'bundles' => false,
+    	],
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => '-hezUTdz9HiMT7vnsNkKA8oe44laJq2l',
+            'cookieValidationKey' => '1hezUTdz9HiMT7vnsNkKA8oe44laJq2l',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -38,7 +41,20 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
+    	'urlManager' => [
+    		'class' => 'yii\web\UrlManager',
+    		// Disable index.php
+    		'showScriptName' => false,
+    		// Disable r= routes
+    		'enablePrettyUrl' => true,
+    		'rules' => array(
+    			'<controller:\w+>/<id:\d+>' => '<controller>/view',
+    			'<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+    			'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+    		),
+    	],
     ],
+
     'params' => $params,
 ];
 
