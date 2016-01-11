@@ -5,10 +5,12 @@ namespace app\controllers;
 use Yii;
 use app\models\Book;
 use app\models\BookSearch;
+use app\models\Author;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 
 /**
  * BookController implements the CRUD actions for Book model.
@@ -44,10 +46,13 @@ class BookController extends Controller
     {
         $searchModel = new BookSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $authors = Author::find()->all();
+        $dropDownSearchItems = ArrayHelper::map($authors,'id','firstname');
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+        	'dropDownSearchItems' => $dropDownSearchItems
         ]);
     }
 

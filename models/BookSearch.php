@@ -12,8 +12,10 @@ use app\models\Book;
  */
 class BookSearch extends Book
 {
-	public  $published_from;
+	public $published_from;
 	public $published_to;
+	public $author;
+	
     /**
      * @inheritdoc
      */
@@ -21,7 +23,7 @@ class BookSearch extends Book
     {
         return [
         		[['id', 'author_id'], 'integer'],
-        		[['name', 'date_created', 'date_updated', 'date', 'published_from', 'published_to'], 'safe'],
+        		[['name', 'date_created', 'date_updated', 'date', 'published_from', 'published_to', 'author'], 'safe'],
         ];
     }
 
@@ -48,6 +50,8 @@ class BookSearch extends Book
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+        
+        $query->joinWith(['author']);
 
         $this->load($params);
 
@@ -59,10 +63,9 @@ class BookSearch extends Book
 
         $query->andFilterWhere([
             'id' => $this->id,
+        	'name' => $this->name,
             'date_created' => $this->date_created,
-            'date_updated' => $this->date_updated,
             'date' => $this->date,
-            'author_id' => $this->author_id,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
