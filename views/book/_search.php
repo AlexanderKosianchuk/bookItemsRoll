@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use dosamigos\datepicker\DatePicker;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\BookSearch */
@@ -20,31 +22,33 @@ use yii\widgets\ActiveForm;
 					->dropDownList($dropDownSearchItems, ['prompt'=> Yii::t('app', 'Author')])->label(false);;?>
 			</div>   
 			<div class='col-md-3'><?php echo $form->field($model, 'name')
-					->textInput(['placeholder' => Yii::t('app', 'Book Name')])->label(false);; ?>
+					->textInput(['placeholder' => Yii::t('app', 'Book Name')])->label(false); ?>
 			</div>   
 	</div>
 	
 	<div class='row'>
-		<div class='col-md-1'><label>12453245</label></div>
-		<div class='col-md-3'>
-			<?php echo $form->field($model, 'published_from')->label(false); ?>
+		<div class='col-md-2 search-fields-label'>
+			<?= Yii::t('app', 'Book publish date') ?>:
 		</div>
-		<div class='col-md-1'><label>345345</label></div> 
-		<div class='col-md-2'>
-			<?php echo $form->field($model, 'published_to',
-					['template' => '<div>{label}<div>{input}</div><div>{error}</div>']) ?>
-		</div>   
-		<div class='col-md-2'>_</div>
-	</div>    
+		<div class='col-md-3'>
+			<?php /*TODO datetime picker*/ ?>
+			<?= $form->field($model, 'published_from')->label(false); ?>
+		</div>
+		<div class='col-md-1 search-fields-label'>
+			<?= Yii::t('app', 'till') ?>
+		</div>
+		<div class='col-md-3'>
+			<?php /*TODO datetime picker*/ ?>
+			<?= $form->field($model, 'published_to')->label(false); ?>
+		</div> 
+		<div class='col-md-3'>&nbsp;</div> 
+	</div>     
 
-	<div class='row'>
-	    <div class="form-group">
-	        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-	        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
-	    </div>
+    <div class="form-group">
+        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
     </div>
     
-    </div>
 
     <?php ActiveForm::end(); ?>
 

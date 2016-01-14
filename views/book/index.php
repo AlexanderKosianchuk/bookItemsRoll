@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php echo $this->render('_search', ['model' => $searchModel, 'dropDownSearchItems' => $dropDownSearchItems]); ?>
 
     <p>
-        <?= Html::a('Create Book', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Book'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -61,8 +61,26 @@ $this->params['breadcrumbs'][] = $this->title;
             'date',
             'date_created',
             
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+            		'class' => 'yii\grid\ActionColumn',
+					'template' => '{view} {update} {delete}',
+			        'headerOptions' => ['class' => 'activity-view-link'],
+			        'contentOptions' => ['class' => 'padding-left-5px'],
+			
+			        'buttons' => [
+			            'update' => function ($url, $model, $key) {
+			                return Html::a('<span class="glyphicon glyphicon-pencil"></span>','/branches/update?id='.$key.'', [
+			                    'class' => 'activity-view-link',
+			                    'title' => Yii::t('yii', 'Update'),
+			                    'data-toggle' => 'modal',
+			                    'data-target' => '#activity-modal',
+			                    'data-id' => $key,
+			                    'data-pjax' => '0',		
+			                ]);
+			            },
+			        ],
+    		],
         ],
     ]); ?>
-
+    
 </div>

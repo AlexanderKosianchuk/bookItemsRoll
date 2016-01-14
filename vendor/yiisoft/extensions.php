@@ -57,24 +57,6 @@ return array (
       '@yii/faker' => $vendorDir . '/yiisoft/yii2-faker',
     ),
   ),
-  '2amigos/yii2-gallery-widget' => 
-  array (
-    'name' => '2amigos/yii2-gallery-widget',
-    'version' => '1.0.2.0',
-    'alias' => 
-    array (
-      '@dosamigos/gallery' => $vendorDir . '/2amigos/yii2-gallery-widget/src',
-    ),
-  ),
-  '2amigos/yii2-file-upload-widget' => 
-  array (
-    'name' => '2amigos/yii2-file-upload-widget',
-    'version' => '1.0.2.0',
-    'alias' => 
-    array (
-      '@dosamigos/fileupload' => $vendorDir . '/2amigos/yii2-file-upload-widget/src',
-    ),
-  ),
   'branchonline/yii2-lightbox' => 
   array (
     'name' => 'branchonline/yii2-lightbox',
@@ -84,22 +66,13 @@ return array (
       '@branchonline/lightbox' => $vendorDir . '/branchonline/yii2-lightbox/src',
     ),
   ),
-  'kartik-v/yii2-krajee-base' => 
+  '2amigos/yii2-date-picker-widget' => 
   array (
-    'name' => 'kartik-v/yii2-krajee-base',
-    'version' => '1.8.2.0',
+    'name' => '2amigos/yii2-date-picker-widget',
+    'version' => '1.0.5.0',
     'alias' => 
     array (
-      '@kartik/base' => $vendorDir . '/kartik-v/yii2-krajee-base',
-    ),
-  ),
-  'kartik-v/yii2-widget-datepicker' => 
-  array (
-    'name' => 'kartik-v/yii2-widget-datepicker',
-    'version' => '9999999-dev',
-    'alias' => 
-    array (
-      '@kartik/date' => $vendorDir . '/kartik-v/yii2-widget-datepicker',
+      '@dosamigos/datepicker' => $vendorDir . '/2amigos/yii2-date-picker-widget/src',
     ),
   ),
 );

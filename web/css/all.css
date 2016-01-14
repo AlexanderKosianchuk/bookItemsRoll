@@ -7051,7 +7051,10 @@ a.desc:after {
   padding: 10px 20px;
   margin: 0 0 15px 0;
 }
-.grid-view-img-cell {
+.book-index .book-search .search-fields-label {
+  padding-top: 5px;
+}
+.book-index .grid-view-img-cell {
   max-width: 100px;
 }
 /*# sourceMappingURL=web/css/all.css.map */

@@ -18,9 +18,10 @@
         "yiisoft/yii2": ">=2.0.5",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
-        "2amigos/yii2-file-upload-widget": "~1.0",
+        "fxp/composer-asset-plugin": "~1.1.1",
         "branchonline/yii2-lightbox": "*",
-        "kartik-v/yii2-widget-datepicker": "@dev"
+        "eternicode/bootstrap-datepicker": "*",
+        "2amigos/yii2-date-picker-widget": "~1.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
