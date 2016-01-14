@@ -2,8 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\widgets\ActiveForm;
-use yii\helpers\Url;
+use yii\bootstrap\Modal;
 use branchonline\lightbox\Lightbox;
 
 /* @var $this yii\web\View */
@@ -68,14 +67,14 @@ $this->params['breadcrumbs'][] = $this->title;
 			        'contentOptions' => ['class' => 'padding-left-5px'],
 			
 			        'buttons' => [
-			            'update' => function ($url, $model, $key) {
-			                return Html::a('<span class="glyphicon glyphicon-pencil"></span>','/branches/update?id='.$key.'', [
+			            'view' => function ($url, $model, $key) {
+			                return Html::a('<span class="glyphicon glyphicon-eye-open"></span>',
+			                		'/book/'.$key, [
 			                    'class' => 'activity-view-link',
-			                    'title' => Yii::t('yii', 'Update'),
+			                    'title' => Yii::t('yii', 'View'),
 			                    'data-toggle' => 'modal',
 			                    'data-target' => '#activity-modal',
 			                    'data-id' => $key,
-			                    'data-pjax' => '0',		
 			                ]);
 			            },
 			        ],
@@ -83,4 +82,14 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
     
+    
+	<?php 
+		Modal::begin([
+			'id' => 'activity-modal',
+			'class' => 'modal-view'
+		]);
+		
+		Modal::end();
+	?>
+	
 </div>

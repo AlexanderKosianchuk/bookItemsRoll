@@ -7055,6 +7055,12 @@ a.desc:after {
   padding-top: 5px;
 }
 .book-index .grid-view-img-cell {
-  max-width: 100px;
+  max-width: 6em;
+}
+.book-index .modal-dialog {
+  min-width: 80%;
+}
+.book-index .modal-dialog .modal-content {
+  padding: 15px;
 }
 /*# sourceMappingURL=web/css/all.css.map */

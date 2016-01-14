@@ -20,8 +20,11 @@ return [
 	'Books' => 'Книги',
 	'Book Name' => 'Название книги',
 	'Search' => 'Искать',
+	'View' => 'Просмотр',
 	'Reset' => 'Сбросить',
 	'Book publish date' => 'Дата выхода книги',
 	'till' => 'до',
-	'Create Book' => 'Создать'	
+	'Create Book' => 'Создать',
+	'Update' => 'Oбновить',
+	'Delete' => 'Удалить'
 ];

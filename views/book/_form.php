@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'date_updated')->textInput() ?>
 
-    <?= $form->field($model, 'preview')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'preview')->fileInput() ?>
 
     <?= $form->field($model, 'date')->textInput() ?>
 

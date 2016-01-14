@@ -34,7 +34,8 @@ class Book extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'date_created', 'date_updated', 'preview', 'date', 'author_id'], 'required'],
-            [['date_created', 'date_updated', 'date', 'author'], 'safe'],
+            [['preview'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+        	[['date_created', 'date_updated', 'date', 'author'], 'safe'],
             [['author_id'], 'integer'],
             [['name', 'preview'], 'string', 'max' => 255]
         ];
@@ -56,6 +57,7 @@ class Book extends \yii\db\ActiveRecord
         	'author' => Yii::t('app', 'Author')
         ];
     }
+    
 
     /**
      * @return \yii\db\ActiveQuery
