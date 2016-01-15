@@ -19,6 +19,7 @@ use Yii;
  */
 class Book extends \yii\db\ActiveRecord
 {
+	public $file;
     /**
      * @inheritdoc
      */
@@ -34,7 +35,7 @@ class Book extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'date_created', 'date_updated', 'preview', 'date', 'author_id'], 'required'],
-            [['preview'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+            [['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
         	[['date_created', 'date_updated', 'date', 'author'], 'safe'],
             [['author_id'], 'integer'],
             [['name', 'preview'], 'string', 'max' => 255]
@@ -52,6 +53,7 @@ class Book extends \yii\db\ActiveRecord
             'date_created' => Yii::t('app', 'Date Created'),
             'date_updated' => Yii::t('app', 'Date Updated'),
             'preview' => Yii::t('app', 'Preview'),
+        	'file' => Yii::t('app', 'Preview File'),
             'date' => Yii::t('app', 'Date'),
             'author_id' => Yii::t('app', 'Author ID'),
         	'author' => Yii::t('app', 'Author')

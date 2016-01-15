@@ -48,7 +48,7 @@ class BookController extends Controller
         $searchModel = new BookSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $authors = Author::find()->all();
-        $dropDownSearchItems = ArrayHelper::map($authors,'id','firstname');
+        $dropDownSearchItems = ArrayHelper::map($authors,'id','lastname');
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -66,7 +66,7 @@ class BookController extends Controller
     {
     	$request = Yii::$app->request;
     	if ($request->isAjax) {
-    		return $this->renderPar('view', [
+    		return $this->renderPartial('view', [
     				'model' => $this->findModel($id),
     		]);
     	} else {
@@ -105,14 +105,39 @@ class BookController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+    	var_dump($_FILES);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+    	
+        $model = $this->findModel($id);
+        
+        $returningToUpdate = function() use ($model) {
+        	$authors = Author::find()->all();
+        	$dropDownSearchItems = ArrayHelper::map($authors,'id','lastname');
+        	 
+        	return $this->render('update', [
+        			'model' => $model,
+        			'dropDownAuthorItems' => $dropDownSearchItems
+        	]);
+        };
+
+        
+        if ($model->load(Yii::$app->request->post())){
+        	
+        	$file = UploadedFile::getInstance($model, 'file');
+        	
+        	
+        	
+        	$model->preview = $file->saveAs('preview_img/' . 
+        			$model->file->baseName . '.' . 
+        			$model->file->extension);
+        	
+        	if($model->save()) {
+            	return $this->redirect(['view', 'id' => $model->id]);
+        	} else {
+        		return $returningToUpdate();
+        	}
         } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+        	return $returningToUpdate();
         }
     }
 

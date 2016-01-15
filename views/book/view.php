@@ -32,7 +32,27 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'date_created',
             'date_updated',
-            'preview',
+            [
+        		'label' => Yii::t('app', 'Preview'),
+        		'format' => 'raw',
+        		'contentOptions'=> ['class' => 'grid-view-img-cell'], // <-- right here
+        		'value' => function($data) {
+    				$lightboxWidget = Lightbox::widget([
+    					'files' => [
+    						[
+    							'thumb' => $data->preview,
+    							'original' => $data->preview
+    						],
+    					],	
+    				]);
+    				
+    				//there was not found the way to set style to Lightbox::widget img,
+    				//thus using brut forse till this widget wont be improved
+    				//alt is option that always appears in widget compiled html
+    				return str_replace('alt', 'style=\'max-width:100%\'', 
+    						$lightboxWidget);
+    			}	
+    		],
             'date',
             'author_id',
         ],

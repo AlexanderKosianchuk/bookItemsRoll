@@ -18,11 +18,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'date_updated')->textInput() ?>
 
-    <?= $form->field($model, 'preview')->fileInput() ?>
+    <?= $form->field($model, 'file')->fileInput() ?>
 
     <?= $form->field($model, 'date')->textInput() ?>
 
-    <?= $form->field($model, 'author_id')->textInput() ?>
+    <?= $form->field($model, 'author_id')
+        ->dropDownList(
+            $dropDownAuthorItems
+        ); ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

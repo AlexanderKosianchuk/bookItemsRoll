@@ -14,6 +14,7 @@ return [
     'Date Created' =>  'Дата добавления',
     'Date Updated' =>  'Дата обновления',
     'Preview' => 'Превью',
+	'Preview File' => 'Файл',
     'Date' =>  'Дата выхода книги',
     'Author ID' =>  'ID автора',
 	'Author' => 'Автор',
