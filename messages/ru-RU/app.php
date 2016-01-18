@@ -27,5 +27,8 @@ return [
 	'till' => 'до',
 	'Create Book' => 'Создать',
 	'Update' => 'Oбновить',
-	'Delete' => 'Удалить'
+	'Delete' => 'Удалить',
+	'Image unavaliable' => 'Картинка не доступна',
+	'Logout' => 'Выйти',
+	'Create Book' => 'Создать книгу'
 ];

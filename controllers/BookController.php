@@ -84,15 +84,23 @@ class BookController extends Controller
     public function actionCreate()
     {
         $model = new Book();
-        $model->file = UploadedFile::getInstance($model, 'preview');
+
         
         if ($model->load(Yii::$app->request->post()) && 
-        	$model->file->saveAs('preview_img/' . $model->preview->baseName . '.' . $model->preview->extension) &&
         	$model->save()) {
+        		
+        		$model->file = UploadedFile::getInstance($model, 'file');
+        		$model->file->saveAs('preview_img/' . $model->file->baseName . '.' . $model->file->extension);
+        		
             	return $this->redirect(['view', 'id' => $model->id]);
         } else {
+        	
+        	$authors = Author::find()->all();
+        	$dropDownSearchItems = ArrayHelper::map($authors,'id','lastname');
+        	
             return $this->render('create', [
                 'model' => $model,
+        		'dropDownAuthorItems' => $dropDownSearchItems
             ]);
         }
     }
@@ -104,10 +112,7 @@ class BookController extends Controller
      * @return mixed
      */
     public function actionUpdate($id)
-    {
-    	var_dump($_FILES);
-
-    	
+    {   	
         $model = $this->findModel($id);
         
         $returningToUpdate = function() use ($model) {

@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "books".
@@ -19,7 +20,11 @@ use Yii;
  */
 class Book extends \yii\db\ActiveRecord
 {
-	public $file;
+	 /**
+     * @var UploadedFile|Null file attribute
+     */
+    public $file;
+    
     /**
      * @inheritdoc
      */
