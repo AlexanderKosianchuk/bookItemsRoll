@@ -14,12 +14,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'date_created')->textInput() ?>
+    <?= $form->field($model, 'image')->fileInput() ?>
 
-    <?= $form->field($model, 'date_updated')->textInput() ?>
-
-    <?= $form->field($model, 'file')->fileInput() ?>
-
+	<?php /*TODO implement data input via datepicker */ ?>
     <?= $form->field($model, 'date')->textInput() ?>
 
     <?= $form->field($model, 'author_id')
@@ -28,7 +25,10 @@ use yii\widgets\ActiveForm;
         )->label(Yii::t('app', 'Author')); ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 
+        		Yii::t('app', 'Create') : 
+        		Yii::t('app', 'Update'), 
+        		['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

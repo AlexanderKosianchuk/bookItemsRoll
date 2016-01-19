@@ -12,7 +12,8 @@
         "irc": "irc://irc.freenode.net/yii",
         "source": "https://github.com/yiisoft/yii2"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": ">=2.0.5",
@@ -21,10 +22,11 @@
         "fxp/composer-asset-plugin": "~1.1.1",
         "branchonline/yii2-lightbox": "*",
         "eternicode/bootstrap-datepicker": "*",
-        "2amigos/yii2-date-picker-widget": "~1.0"
+        "2amigos/yii2-date-picker-widget": "~1.0",
+        "codeception/codeception": "^2.1"
     },
     "require-dev": {
-        "yiisoft/yii2-codeception": "*",
+        "yiisoft/yii2-codeception": "^2.0",
         "yiisoft/yii2-debug": "*",
         "yiisoft/yii2-gii": "*",
         "yiisoft/yii2-faker": "*"

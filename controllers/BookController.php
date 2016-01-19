@@ -12,6 +12,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\web\UploadedFile;
+use yii\base\DynamicModel;
 
 /**
  * BookController implements the CRUD actions for Book model.
@@ -84,24 +85,33 @@ class BookController extends Controller
     public function actionCreate()
     {
         $model = new Book();
-
         
-        if ($model->load(Yii::$app->request->post()) && 
-        	$model->save()) {
-        		
-        		$model->file = UploadedFile::getInstance($model, 'file');
-        		$model->file->saveAs('preview_img/' . $model->file->baseName . '.' . $model->file->extension);
-        		
-            	return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-        	
+        $returning = function() use ($model) {
         	$authors = Author::find()->all();
         	$dropDownSearchItems = ArrayHelper::map($authors,'id','lastname');
-        	
+
             return $this->render('create', [
                 'model' => $model,
         		'dropDownAuthorItems' => $dropDownSearchItems
             ]);
+        };
+        
+        if($model->load(Yii::$app->request->post())) {
+	        $model->image = UploadedFile::getInstance($model, 'image');
+	        if(is_object($model->image)) {
+		        $preview = 'preview_img/' . uniqid() . '_' . $model->image->name;
+		        $model->image->saveAs($preview);
+		        $model->image = null;
+		        $model->preview = '/' . $preview;
+	        }
+	        
+        	if ($model->save()) {
+            	return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+            	return $returning();
+           	}
+        } else {
+        	return $returning();
         }
     }
 
@@ -115,7 +125,7 @@ class BookController extends Controller
     {   	
         $model = $this->findModel($id);
         
-        $returningToUpdate = function() use ($model) {
+        $returning = function() use ($model) {
         	$authors = Author::find()->all();
         	$dropDownSearchItems = ArrayHelper::map($authors,'id','lastname');
         	 
@@ -124,25 +134,23 @@ class BookController extends Controller
         			'dropDownAuthorItems' => $dropDownSearchItems
         	]);
         };
-
         
-        if ($model->load(Yii::$app->request->post())){
-        	
-        	$file = UploadedFile::getInstance($model, 'file');
-        	
-        	
-        	
-        	$model->preview = $file->saveAs('preview_img/' . 
-        			$model->file->baseName . '.' . 
-        			$model->file->extension);
-        	
-        	if($model->save()) {
-            	return $this->redirect(['view', 'id' => $model->id]);
+        if($model->load(Yii::$app->request->post())) {
+	        $model->image = UploadedFile::getInstance($model, 'image');
+	        if(is_object($model->image)) {
+		        $preview = 'preview_img/' . uniqid() . '_' . $model->image->name;
+		        $model->image->saveAs($preview);
+		        $model->image = null;
+		        $model->preview = '/' . $preview;
+	        }
+        	 
+        	if ($model->save()) {
+        		return $this->redirect(['view', 'id' => $model->id]);
         	} else {
-        		return $returningToUpdate();
+        		return $returning();
         	}
         } else {
-        	return $returningToUpdate();
+        	return $returning();
         }
     }
 

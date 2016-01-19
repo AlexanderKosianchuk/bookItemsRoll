@@ -58,8 +58,18 @@ $this->params['breadcrumbs'][] = $this->title;
     			}
     		],
             'date',
-            'date_created',
-            
+            [
+            	'attribute'=>'created_at',
+            	'value' => function($data) {
+            		return date('Y-m-d H:m:s', $data->created_at);
+            	}
+            ],
+            [
+	            'attribute'=>'updated_at',
+	            'value' => function($data) {
+	            	return date('Y-m-d H:m:s', $data->updated_at);
+	            }
+            ],          
             [
             		'class' => 'yii\grid\ActionColumn',
 					'template' => '{view} {update} {delete}',

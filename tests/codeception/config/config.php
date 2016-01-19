@@ -13,8 +13,11 @@ return [
         ],
     ],
     'components' => [
-        'db' => [
-            'dsn' => 'mysql:host=localhost;dbname=yii2_basic_tests',
+		'db' => [
+            'class' => '\yii\db\Connection',
+            'dsn' => 'sqlite:'.\Yii::getAlias('@tests/_output/temp.db'),
+            'username' => '',
+            'password' => '',
         ],
         'mailer' => [
             'useFileTransport' => true,

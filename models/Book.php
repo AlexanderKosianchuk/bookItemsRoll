@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\web\UploadedFile;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "books".
@@ -23,7 +24,7 @@ class Book extends \yii\db\ActiveRecord
 	 /**
      * @var UploadedFile|Null file attribute
      */
-    public $file;
+    public $image;
     
     /**
      * @inheritdoc
@@ -39,12 +40,19 @@ class Book extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'date_created', 'date_updated', 'preview', 'date', 'author_id'], 'required'],
-            [['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
-        	[['date_created', 'date_updated', 'date', 'author'], 'safe'],
+            [['name', 'preview', 'date', 'author_id', 'created_at', 'updated_at'], 'required'],
+            [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
+        	[['created_at', 'updated_at', 'date', 'author'], 'safe'],
             [['author_id'], 'integer'],
             [['name', 'preview'], 'string', 'max' => 255]
         ];
+    }
+    
+    public function behaviors()
+    {
+    	return [
+    			TimestampBehavior::className(),
+    	];
     }
 
     /**
@@ -55,8 +63,8 @@ class Book extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'Name'),
-            'date_created' => Yii::t('app', 'Date Created'),
-            'date_updated' => Yii::t('app', 'Date Updated'),
+            'created_at' => Yii::t('app', 'Date Created'),
+            'updated_at' => Yii::t('app', 'Date Updated'),
             'preview' => Yii::t('app', 'Preview'),
         	'file' => Yii::t('app', 'Preview File'),
             'date' => Yii::t('app', 'Date'),

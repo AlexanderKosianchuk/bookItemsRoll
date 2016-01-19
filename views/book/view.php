@@ -31,8 +31,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'name',
-            'date_created',
-            'date_updated',
+            [
+            	'label'=>Yii::t('app', 'Date Created'),
+            	'format' => 'raw',
+            	'value' => date('Y-m-d H:m:s', $model->created_at)
+            ],
+            [
+	            'label'=>Yii::t('app', 'Date Updated'),
+            	'format' => 'raw',
+	            'value' => date('Y-m-d H:m:s', $model->updated_at)
+            ], 
             [
         		'label' => Yii::t('app', 'Preview'),
         		'format' => 'raw',
